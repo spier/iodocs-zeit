@@ -1,0 +1,216 @@
+{
+   "endpoints":[
+      {
+         "name":"Author Methods",
+         "methods":[
+            {
+               "MethodName":"Search all authors",
+               "Synopsis":"This endpoint lets you search for authors by their name. An asterisk can serve as a wildcard or whitespace in your search query.",
+               "HTTPMethod":"GET",
+               "URI":"/author",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"q",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"the main search query"
+                  },
+                  {
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  }
+               ]
+            },
+            {
+               "MethodName":"Get author by ID",
+               "Synopsis":"This endpoint provides a pre-filtered search for all articles written by a specific author. Deeper queries, pagination and partial field selection can be used to narrow down the match list.",
+               "HTTPMethod":"GET",
+               "URI":"/author/:id",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"id",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"ID of the author"
+                  },
+                  {
+                     "Name":"q",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"the main search query"
+                  },
+                  {
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  }
+               ]
+            }
+         ]
+      },
+
+
+
+
+
+
+
+      {
+         "name":"User Methods",
+         "methods":[
+            {
+               "MethodName":"Show User",
+               "Synopsis":"This method allows you to retrieve user objects",
+               "HTTPMethod":"GET",
+               "URI":"/users/show.:format",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"users",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"One or more (comma-separated) Twitter usernames"
+                  },
+                  {
+                     "Name":"format",
+                     "Required":"Y",
+                     "Default":"json",
+                     "Type":"enumerated",
+                     "Description":"Output format as JSON or XML",
+                     "EnumeratedList":[
+                        "json",
+                        "xml"
+                     ]
+                  }
+               ]
+            },
+            {
+               "MethodName":"Topics",
+               "Synopsis":"This method allows you to retrieve the top 3 topic objects for a given user",
+               "HTTPMethod":"GET",
+               "URI":"/users/topics.:format",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"users",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"One or more (comma-separated) Twitter usernames"
+                  },
+                  {
+                     "Name":"format",
+                     "Required":"Y",
+                     "Default":"json",
+                     "Type":"enumerated",
+                     "Description":"Output format as JSON or XML",
+                     "EnumeratedList":[
+                        "json",
+                        "xml"
+                     ]
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Relationship Methods",
+         "methods":[
+            {
+               "MethodName":"Influenced By",
+               "Synopsis":"This method allows you to retrieve up to 5 user score pairs for users that are influenced by the given influencer",
+               "HTTPMethod":"GET",
+               "URI":"/soi/influenced_by.:format",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"users",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"One or more (comma-separated) Twitter usernames"
+                  },
+                  {
+                     "Name":"format",
+                     "Required":"Y",
+                     "Default":"json",
+                     "Type":"enumerated",
+                     "Description":"Output format as JSON or XML",
+                     "EnumeratedList":[
+                        "json",
+                        "xml"
+                     ]
+                  }
+               ]
+            },
+            {
+               "MethodName":"Influencer Of",
+               "Synopsis":"This method allows you to retrieve up to 5 user score pairs for users that are influencers of the given user",
+               "HTTPMethod":"GET",
+               "URI":"/soi/influencer_of.:format",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"users",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"One or more (comma-separated) Twitter usernames"
+                  },
+                  {
+                     "Name":"format",
+                     "Required":"Y",
+                     "Default":"json",
+                     "Type":"enumerated",
+                     "Description":"Output format as JSON or XML",
+                     "EnumeratedList":[
+                        "json",
+                        "xml"
+                     ]
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}
+

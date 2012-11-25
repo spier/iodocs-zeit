@@ -1,4 +1,12 @@
-{
+{    
+    "zeit": {
+        "name": "Zeit Content API",
+        "protocol": "http",
+        "baseURL": "api.zeit.de",
+        "publicPath": "",
+        "auth": "key",
+        "keyParam": "api_key"
+    },
     "klout": {
         "name": "Klout API",
         "protocol": "http",
