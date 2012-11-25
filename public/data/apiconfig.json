@@ -1,6 +1,6 @@
 {    
     "zeit": {
-        "name": "ZEIT ONLINE Content API",
+        "name": "I/O Docs for the ZEIT ONLINE Content API",
         "protocol": "http",
         "baseURL": "api.zeit.de",
         "publicPath": "",
