@@ -1,7 +1,9 @@
 {
    "endpoints":[
+
+
       {
-         "name":"Author Methods",
+         "name":"Author",
          "methods":[
             {
                "MethodName":"Search all authors",
@@ -41,7 +43,7 @@
                ]
             },
             {
-               "MethodName":"Get author by ID",
+               "MethodName":"Get author (articles) by ID",
                "Synopsis":"This endpoint provides a pre-filtered search for all articles written by a specific author. Deeper queries, pagination and partial field selection can be used to narrow down the match list.",
                "HTTPMethod":"GET",
                "URI":"/author/:id",
@@ -88,129 +90,518 @@
       },
 
 
-
-
-
+      {
+         "name":"Client",
+         "methods":[
+            {
+               "MethodName":"Observe your usage",
+               "Synopsis":"The user endpoint is not a content resource per se, but lets you get information about your API usage.",
+               "HTTPMethod":"GET",
+               "URI":"/client",
+               "RequiresOAuth":"N",
+               "parameters":[
+               ]
+            }
+         ]
+      },
 
 
       {
-         "name":"User Methods",
+         "name":"Content",
          "methods":[
             {
-               "MethodName":"Show User",
-               "Synopsis":"This method allows you to retrieve user objects",
+               "MethodName":"Search for content",
+               "Synopsis":"This endpoint lets you search for articles freely. You can set search queries, link them logically, paginate and partially select the fields, that should be returned.",
                "HTTPMethod":"GET",
-               "URI":"/users/show.:format",
+               "URI":"/content",
                "RequiresOAuth":"N",
                "parameters":[
                   {
-                     "Name":"users",
-                     "Required":"Y",
+                     "Name":"q",
+                     "Required":"N",
                      "Default":"",
                      "Type":"string",
-                     "Description":"One or more (comma-separated) Twitter usernames"
+                     "Description":"the main search query"
                   },
                   {
-                     "Name":"format",
-                     "Required":"Y",
-                     "Default":"json",
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  },
+                  {
+                     "Name":"operator",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"boolean operator to connect search phrases"
+                  },
+                  {
+                     "Name":"facet_field",
+                     "Required":"N",
+                     "Default":"",
                      "Type":"enumerated",
-                     "Description":"Output format as JSON or XML",
+                     "Description":"used to facet fields",
                      "EnumeratedList":[
-                        "json",
-                        "xml"
+                        "keyword",
+                        "author",
+                        "series",
+                        "department",
+                        "product"
                      ]
-                  }
+                  },
+                  {
+                     "Name":"facet_date",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"enumerated",
+                     "Description":"defines date range",
+                     "EnumeratedList":[
+                        "1day",
+                        "7day",
+                        "1month",
+                        "1year",
+                        "10year"
+                     ]
+                  },
+                  {
+                     "Name":"sort",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"(undocumented) sort search results e.g. release_date desc"
+                  },
+                  {
+                     "Name":"fq",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"(undocumented)"
+                  }               
                ]
             },
             {
-               "MethodName":"Topics",
-               "Synopsis":"This method allows you to retrieve the top 3 topic objects for a given user",
+               "MethodName":"Get content by ID",
+               "Synopsis":"Requesting a content object by its ID will get you an extensive resultset featuring the full article text and all available meta data. Partial field selection is available, if not all fields are of interest.",
                "HTTPMethod":"GET",
-               "URI":"/users/topics.:format",
+               "URI":"/content/:id",
                "RequiresOAuth":"N",
                "parameters":[
                   {
-                     "Name":"users",
+                     "Name":"id",
                      "Required":"Y",
                      "Default":"",
                      "Type":"string",
-                     "Description":"One or more (comma-separated) Twitter usernames"
+                     "Description":"ID of the content object"
                   },
                   {
-                     "Name":"format",
-                     "Required":"Y",
-                     "Default":"json",
-                     "Type":"enumerated",
-                     "Description":"Output format as JSON or XML",
-                     "EnumeratedList":[
-                        "json",
-                        "xml"
-                     ]
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
                   }
                ]
             }
          ]
       },
+
+
       {
-         "name":"Relationship Methods",
+         "name":"Department",
          "methods":[
             {
-               "MethodName":"Influenced By",
-               "Synopsis":"This method allows you to retrieve up to 5 user score pairs for users that are influenced by the given influencer",
+               "MethodName":"Search all departments",
+               "Synopsis":"Departments correlate to the sections of our homepage and to those of the printed issues. There are top level departments and sub-departments. Both are accessible via this endpoint. Sub-departments have a link to their parent attached to them. The query expects an astisk for wildcards and whitespaces.",
                "HTTPMethod":"GET",
-               "URI":"/soi/influenced_by.:format",
+               "URI":"/department",
                "RequiresOAuth":"N",
                "parameters":[
                   {
-                     "Name":"users",
-                     "Required":"Y",
+                     "Name":"q",
+                     "Required":"N",
                      "Default":"",
                      "Type":"string",
-                     "Description":"One or more (comma-separated) Twitter usernames"
+                     "Description":"the main search query"
                   },
                   {
-                     "Name":"format",
-                     "Required":"Y",
-                     "Default":"json",
-                     "Type":"enumerated",
-                     "Description":"Output format as JSON or XML",
-                     "EnumeratedList":[
-                        "json",
-                        "xml"
-                     ]
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
                   }
                ]
             },
             {
-               "MethodName":"Influencer Of",
-               "Synopsis":"This method allows you to retrieve up to 5 user score pairs for users that are influencers of the given user",
+               "MethodName":"Get department (articles) by ID",
+               "Synopsis":"This endpoint provides a pre-filtered search for all articles belonging to a specific department. Deeper queries, pagination and partial field selection can be used to narrow down the match list.",
                "HTTPMethod":"GET",
-               "URI":"/soi/influencer_of.:format",
+               "URI":"/department/:id",
                "RequiresOAuth":"N",
                "parameters":[
                   {
-                     "Name":"users",
+                     "Name":"id",
                      "Required":"Y",
                      "Default":"",
                      "Type":"string",
-                     "Description":"One or more (comma-separated) Twitter usernames"
+                     "Description":"ID of the department"
                   },
                   {
-                     "Name":"format",
-                     "Required":"Y",
-                     "Default":"json",
-                     "Type":"enumerated",
-                     "Description":"Output format as JSON or XML",
-                     "EnumeratedList":[
-                        "json",
-                        "xml"
-                     ]
+                     "Name":"q",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"the main search query"
+                  },
+                  {
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  },
+                  {
+                     "Name":"operator",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"boolean operator to connect search phrases"
                   }
                ]
             }
          ]
-      }
+      },
+
+
+
+      {
+         "name":"Keyword",
+         "methods":[
+            {
+               "MethodName":"Search all keywords",
+               "Synopsis":"This endpoint lets you search for keywords that semantically summarize articles. An asterisk can serve as a wildcard or whitespace in your search query. Keywords are weighted by their overall frequency with a score from 0 to 100. Possible keyword types are: location, person, organisation or issue.",
+               "HTTPMethod":"GET",
+               "URI":"/keyword",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"q",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"the main search query"
+                  },
+                  {
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  }
+               ]
+            },
+            {
+               "MethodName":"Get keyword (articles) by ID",
+               "Synopsis":"This endpoint provides a pre-filtered search for all articles tagged with a specific keyword. Deeper queries, pagination and partial field selection can be used to narrow down the match list.",
+               "HTTPMethod":"GET",
+               "URI":"/keyword/:id",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"id",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"ID of the keyword"
+                  },
+                  {
+                     "Name":"q",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"the main search query"
+                  },
+                  {
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  },
+                  {
+                     "Name":"operator",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"boolean operator to connect search phrases"
+                  }
+               ]
+            }
+         ]
+      },
+
+
+      {
+         "name":"Product",
+         "methods":[
+            {
+               "MethodName":"Search all products",
+               "Synopsis":"This endpoint lets you search for publication products by name. The product field of an article provides information about where the article was first published. An asterisk can serve as a wildcard or whitespace in your search query.",
+               "HTTPMethod":"GET",
+               "URI":"/product",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"q",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"the main search query"
+                  },
+                  {
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  }
+               ]
+            },
+            {
+               "MethodName":"Get product (articles) by ID",
+               "Synopsis":"This endpoint provides a pre-filtered search for all articles published in a specific product. Deeper queries, pagination and partial field selection can be used to narrow down the match list.",
+               "HTTPMethod":"GET",
+               "URI":"/product/:id",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"id",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"ID of the product"
+                  },
+                  {
+                     "Name":"q",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"the main search query"
+                  },
+                  {
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  },
+                  {
+                     "Name":"operator",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"boolean operator to connect search phrases"
+                  }
+               ]
+            }
+         ]
+      },     
+
+
+      {
+         "name":"Series",
+         "methods":[
+            {
+               "MethodName":"Search all series",
+               "Synopsis":"This endpoint lets you search for journalistic series by name. An asterisk can serve as a wildcard or whitespace in your search query.",
+               "HTTPMethod":"GET",
+               "URI":"/series",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"q",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"the main search query"
+                  },
+                  {
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  }
+               ]
+            },
+            {
+               "MethodName":"Get series (articles) by ID",
+               "Synopsis":"This endpoint provides a pre-filtered search for all articles written for a specific series. Deeper queries, pagination and partial field selection can be used to narrow down the match list.",
+               "HTTPMethod":"GET",
+               "URI":"/series/:id",
+               "RequiresOAuth":"N",
+               "parameters":[
+                  {
+                     "Name":"id",
+                     "Required":"Y",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"ID of the series"
+                  },
+                  {
+                     "Name":"q",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"the main search query"
+                  },
+                  {
+                     "Name":"fields",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"partially select output fields"
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"amount of matches to return"
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"offset for the list of matches"
+                  },
+                  {
+                     "Name":"operator",
+                     "Required":"N",
+                     "Default":"",
+                     "Type":"string",
+                     "Description":"boolean operator to connect search phrases"
+                  }
+               ]
+            }
+         ]
+      }    
+
+
    ]
 }
-
