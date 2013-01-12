@@ -155,44 +155,23 @@
                      "Name":"facet_field",
                      "Required":"N",
                      "Default":"",
-                     "Type":"enumerated",
-                     "Description":"used to facet fields",
-                     "EnumeratedList":[
-                        "keyword",
-                        "author",
-                        "series",
-                        "department",
-                        "product"
-                     ]
+                     "Type":"string",
+                     "Description":"faceting on fields. possible values: keyword, author, series, department, product or any combination"
                   },
                   {
                      "Name":"facet_date",
                      "Required":"N",
                      "Default":"",
-                     "Type":"enumerated",
-                     "Description":"defines date range",
-                     "EnumeratedList":[
-                        "1day",
-                        "7day",
-                        "1month",
-                        "1year",
-                        "10year"
-                     ]
+                     "Type":"string",
+                     "Description":"faceting on dates. possible values: 1day, 7day, 1month, 1year, 10year or any numerical variation"
                   },
                   {
                      "Name":"sort",
                      "Required":"N",
                      "Default":"",
                      "Type":"string",
-                     "Description":"(undocumented) sort search results e.g. release_date desc"
-                  },
-                  {
-                     "Name":"fq",
-                     "Required":"N",
-                     "Default":"",
-                     "Type":"string",
-                     "Description":"(undocumented)"
-                  }               
+                     "Description":"sort search results e.g. release_date desc"
+                  }             
                ]
             },
             {
