@@ -8,6 +8,6 @@ If in doubt always refer to the [official documentation][zeit-documentation].
 
 [live]: http://zeitapi-iodocs.herokuapp.com/zeit
 [blog_post]: http://spier.hu/2012/11/iodocs-for-zeit-online-content-api/
-[zeit-documention]: http://developer.zeit.de/index/
+[zeit-documentation]: http://developer.zeit.de/index/
 [iodocs]: https://github.com/mashery/iodocs
 [heroku]: http://www.heroku.com
