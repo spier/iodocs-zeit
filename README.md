@@ -1,6 +1,6 @@
 # I/O Docs for the ZEIT ONLINE Content API
 
-This is the source code for the [I/O Docs for the ZEIT ONLINE Content API][live]. It is based on [mashery's I/O Docs][iodocs] with some configuration changes to run on [heroku][]. More information about this project can be found in this [blog post][].
+This is the source code for the [I/O Docs for the ZEIT ONLINE Content API][live]. It is based on [mashery's I/O Docs][iodocs] with some configuration changes to run on [heroku][]. More information about this project can be found in this [blog post][blog_post].
 
 Warning:
 This is not the official documentation of the ZEIT ONLINE Content API.
